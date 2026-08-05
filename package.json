@@ -1,0 +1,11 @@
+{
+  "name": "jose-portfolio",
+  "version": "1.0.0",
+  "description": "Static portfolio site",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo Build complete"
+  },
+  "author": "Jose",
+  "license": "MIT"
+}
