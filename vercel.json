@@ -1,9 +1,10 @@
 {
+  "version": 2,
   "cleanUrls": true,
-  "trailingSlash": false,
-  "functions": {
-    "server.js": {
-      "includeFiles": "assets/**, *.html, styles.css, script.js"
+  "builds": [
+    {
+      "src": "**",
+      "use": "@vercel/static"
     }
-  }
+  ]
 }
