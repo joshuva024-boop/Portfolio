@@ -9,11 +9,14 @@
   <link rel="alternate icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     .project-detail-body {
       background: #060608;
+
       color: #FFF;
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
@@ -201,7 +204,8 @@
       <span class="project-tag">DATA SCIENCE & ML CASE STUDY</span>
       <h1 class="project-title">CUSTOMER CHURN PREDICTIVE MODEL</h1>
       <p style="font-size: 1.1rem; color: rgba(255,255,255,0.7); max-width: 800px; line-height: 1.6;">
-        A predictive machine learning pipeline built with Python, Pandas, and Random Forest classifiers to identify churn risk early and automate targeted customer retention campaigns.
+        A predictive machine learning pipeline built with Python, Pandas, and Random Forest classifiers to identify
+        churn risk early and automate targeted customer retention campaigns.
       </p>
 
       <div class="project-meta-grid">
@@ -233,34 +237,36 @@
         <div class="content-box">
           <h3>PROBLEM STATEMENT & METHODOLOGY</h3>
           <p>
-            Subscription loss was resulting in substantial annual revenue decay. The client needed an automated machine learning model to flag high-risk subscribers 30 days prior to renewal dates.
+            Subscription loss was resulting in substantial annual revenue decay. The client needed an automated machine
+            learning model to flag high-risk subscribers 30 days prior to renewal dates.
           </p>
           <p>
-            I performed feature engineering on user session frequency, support ticket volume, and billing history. Model evaluation was conducted across Logistic Regression, XGBoost, and Random Forest classifiers.
+            I performed feature engineering on user session frequency, support ticket volume, and billing history. Model
+            evaluation was conducted across Logistic Regression, XGBoost, and Random Forest classifiers.
           </p>
         </div>
 
         <div class="content-box">
           <h3>PYTHON MACHINE LEARNING CODE SNIPPET</h3>
           <div class="code-block">
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, roc_auc_score
+            import pandas as pd
+            from sklearn.model_selection import train_test_split
+            from sklearn.ensemble import RandomForestClassifier
+            from sklearn.metrics import classification_report, roc_auc_score
 
-# Load customer behavioral feature matrix
-df = pd.read_csv('customer_churn_data.csv')
+            # Load customer behavioral feature matrix
+            df = pd.read_csv('customer_churn_data.csv')
 
-X = df[['monthly_charges', 'tenure_months', 'support_tickets', 'login_frequency']]
-y = df['churn_label']
+            X = df[['monthly_charges', 'tenure_months', 'support_tickets', 'login_frequency']]
+            y = df['churn_label']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)
-model.fit(X_train, y_train)
+            model = RandomForestClassifier(n_estimators=200, max_depth=10, random_state=42)
+            model.fit(X_train, y_train)
 
-preds = model.predict(X_test)
-print("AUC-ROC Score:", roc_auc_score(y_test, model.predict_proba(X_test)[:, 1]))
+            preds = model.predict(X_test)
+            print("AUC-ROC Score:", roc_auc_score(y_test, model.predict_proba(X_test)[:, 1]))
           </div>
         </div>
       </div>

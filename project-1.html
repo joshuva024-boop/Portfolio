@@ -9,10 +9,13 @@
   <link rel="alternate icon" href="favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     .project-detail-body {
+
       background: #060608;
       color: #FFF;
       font-family: 'Inter', sans-serif;
@@ -201,7 +204,8 @@
       <span class="project-tag">PRIMARY DATA ANALYST CASE STUDY</span>
       <h1 class="project-title">RETAIL SALES ANALYTICS DASHBOARD</h1>
       <p style="font-size: 1.1rem; color: rgba(255,255,255,0.7); max-width: 800px; line-height: 1.6;">
-        An executive-grade Power BI dashboard powered by complex SQL data pipelines to analyze regional sales velocity, customer segment profitability, and inventory churn across 50,000+ retail transactions.
+        An executive-grade Power BI dashboard powered by complex SQL data pipelines to analyze regional sales velocity,
+        customer segment profitability, and inventory churn across 50,000+ retail transactions.
       </p>
 
       <div class="project-meta-grid">
@@ -233,10 +237,13 @@
         <div class="content-box">
           <h3>EXECUTIVE SUMMARY & PROBLEM STATEMENT</h3>
           <p>
-            The retail client faced fragmented sales reporting across multiple regional databases, making real-time margin tracking and store performance comparison nearly impossible for executives.
+            The retail client faced fragmented sales reporting across multiple regional databases, making real-time
+            margin tracking and store performance comparison nearly impossible for executives.
           </p>
           <p>
-            I engineered an end-to-end analytics workflow: extracting multi-table transactional data using PostgreSQL queries, modeling star-schema relationships in Power BI, and writing DAX measures for dynamic MoM growth tracking.
+            I engineered an end-to-end analytics workflow: extracting multi-table transactional data using PostgreSQL
+            queries, modeling star-schema relationships in Power BI, and writing DAX measures for dynamic MoM growth
+            tracking.
           </p>
         </div>
 
@@ -244,17 +251,17 @@
           <h3>SQL QUERY & DAX MEASURE HIGHLIGHT</h3>
           <p>Sample SQL query used for customer cohort revenue aggregation and DAX metric formulation:</p>
           <div class="code-block">
-SELECT 
-    c.customer_segment,
-    DATE_TRUNC('month', s.order_date) AS order_month,
-    SUM(s.sales_amount) AS total_revenue,
-    COUNT(DISTINCT s.order_id) AS order_volume,
-    SUM(s.profit_margin) / SUM(s.sales_amount) AS margin_ratio
-FROM retail_sales s
-JOIN customer_dim c ON s.customer_id = c.customer_id
-WHERE s.order_date >= '2025-01-01'
-GROUP BY 1, 2
-ORDER BY order_month DESC, total_revenue DESC;
+            SELECT
+            c.customer_segment,
+            DATE_TRUNC('month', s.order_date) AS order_month,
+            SUM(s.sales_amount) AS total_revenue,
+            COUNT(DISTINCT s.order_id) AS order_volume,
+            SUM(s.profit_margin) / SUM(s.sales_amount) AS margin_ratio
+            FROM retail_sales s
+            JOIN customer_dim c ON s.customer_id = c.customer_id
+            WHERE s.order_date >= '2025-01-01'
+            GROUP BY 1, 2
+            ORDER BY order_month DESC, total_revenue DESC;
           </div>
         </div>
       </div>

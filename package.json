@@ -4,6 +4,7 @@
   "description": "Static portfolio site",
   "private": true,
   "scripts": {
+    "build": "echo Build complete",
     "dev": "node server.local.js",
     "start": "node server.local.js"
   },
