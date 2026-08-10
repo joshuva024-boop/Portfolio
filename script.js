@@ -426,6 +426,55 @@
     }
     let testiTimer = setInterval(() => goToTesti((testiIndex + 1) % testimonials.length), 5500);
     const testiWrap = document.querySelector('.testi-wrap');
+
+    const neonGlowPalette = [
+      {
+        gradient: 'linear-gradient(135deg, #FFFFFF 0%, #FF6542 50%, #FF2B3C 100%)',
+        filter: 'drop-shadow(0 10px 20px rgba(255, 43, 60, 0.4)) drop-shadow(0 0 10px rgba(255, 43, 60, 0.25))'
+      },
+      {
+        gradient: 'linear-gradient(135deg, #FFFFFF 0%, #70E0FF 50%, #00F0FF 100%)',
+        filter: 'drop-shadow(0 10px 20px rgba(0, 240, 255, 0.4)) drop-shadow(0 0 10px rgba(0, 240, 255, 0.25))'
+      },
+      {
+        gradient: 'linear-gradient(135deg, #FFFFFF 0%, #C084FC 50%, #A855F7 100%)',
+        filter: 'drop-shadow(0 10px 20px rgba(168, 85, 247, 0.4)) drop-shadow(0 0 10px rgba(168, 85, 247, 0.25))'
+      },
+      {
+        gradient: 'linear-gradient(135deg, #FFFFFF 0%, #FCD34D 50%, #FFB800 100%)',
+        filter: 'drop-shadow(0 10px 20px rgba(255, 184, 0, 0.4)) drop-shadow(0 0 10px rgba(255, 184, 0, 0.25))'
+      },
+      {
+        gradient: 'linear-gradient(135deg, #FFFFFF 0%, #34D399 50%, #00FF9D 100%)',
+        filter: 'drop-shadow(0 10px 20px rgba(0, 255, 157, 0.4)) drop-shadow(0 0 10px rgba(0, 255, 157, 0.25))'
+      },
+      {
+        gradient: 'linear-gradient(135deg, #FFFFFF 0%, #F472B6 50%, #FF007A 100%)',
+        filter: 'drop-shadow(0 10px 20px rgba(255, 0, 122, 0.4)) drop-shadow(0 0 10px rgba(255, 0, 122, 0.25))'
+      }
+    ];
+
+    let currentGlowIndex = 0;
+    const heroNameEl = document.getElementById('heroName');
+
+    if (heroNameEl) {
+      heroNameEl.addEventListener('mouseenter', () => {
+        const activePalette = neonGlowPalette[currentGlowIndex];
+        heroNameEl.style.background = activePalette.gradient;
+        heroNameEl.style.webkitBackgroundClip = 'text';
+        heroNameEl.style.webkitTextFillColor = 'transparent';
+        heroNameEl.style.filter = activePalette.filter;
+        currentGlowIndex = (currentGlowIndex + 1) % neonGlowPalette.length;
+      });
+
+      heroNameEl.addEventListener('mouseleave', () => {
+        heroNameEl.style.background = 'linear-gradient(135deg, #FFFFFF 0%, #E6E6FA 45%, #FF2B3C 90%)';
+        heroNameEl.style.webkitBackgroundClip = 'text';
+        heroNameEl.style.webkitTextFillColor = 'transparent';
+        heroNameEl.style.filter = 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.7))';
+      });
+    }
+
     if (testiWrap) {
       testiWrap.addEventListener('mouseenter', () => clearInterval(testiTimer));
       testiWrap.addEventListener('mouseleave', () => {
@@ -567,6 +616,64 @@
       box.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)';
     });
   });
+
+  /* ---------------------------------------------------------
+     15C. SMOOTH 3D MOUSE ROTATION CONTROLLER FOR 3D CHARACTER
+  --------------------------------------------------------- */
+  const charWrap = document.getElementById('character3DContainer');
+  const charCard = document.querySelector('.character-3d-card');
+  const charGlow = document.querySelector('.character-3d-glow');
+
+  if (charWrap && charCard) {
+    let mouseX = 0, mouseY = 0;
+    let currentX = 0, currentY = 0;
+    let isHovered = false;
+
+    function animateCharacter3D() {
+      if (isHovered) {
+        currentX += (mouseX - currentX) * 0.12;
+        currentY += (mouseY - currentY) * 0.12;
+      } else {
+        currentX += (0 - currentX) * 0.08;
+        currentY += (0 - currentY) * 0.08;
+      }
+
+      const rotateY = currentX * 25; // Smooth 3D Y rotation up to 25deg
+      const rotateX = -currentY * 25; // Smooth 3D X rotation up to 25deg
+      const translateZ = isHovered ? 28 : 0;
+      const scale = isHovered ? 1.05 : 1;
+
+      charCard.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateZ(${translateZ}px) scale(${scale})`;
+
+      if (charGlow) {
+        const glowX = ((currentX + 1) / 2) * 100;
+        const glowY = ((currentY + 1) / 2) * 100;
+        charGlow.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(255, 43, 60, 0.45) 0%, rgba(255, 43, 60, 0.1) 45%, transparent 70%)`;
+      }
+
+      requestAnimationFrame(animateCharacter3D);
+    }
+
+    animateCharacter3D();
+
+    charWrap.addEventListener('mousemove', (e) => {
+      const rect = charWrap.getBoundingClientRect();
+      mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1; // -1 to 1
+      mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1; // -1 to 1
+      isHovered = true;
+    });
+
+    charWrap.addEventListener('mouseenter', () => {
+      isHovered = true;
+    });
+
+    charWrap.addEventListener('mouseleave', () => {
+      isHovered = false;
+      mouseX = 0;
+      mouseY = 0;
+    });
+  }
+
   /* ---------------------------------------------------------
      16. BIDIRECTIONAL SCROLL REVEAL (SCROLL UP & DOWN ANIMATIONS)
   --------------------------------------------------------- */
@@ -605,6 +712,83 @@
     });
   } else {
     autoPopTargets.forEach(el => el.classList.add('pop-visible'));
+  }
+
+  /* ---------------------------------------------------------
+     18. FLOATING BADGE CLICK POP-UP & DUAL RIPPLE (2.5s Extended Duration)
+  --------------------------------------------------------- */
+  const floatingBadge = document.querySelector('.floating-badge');
+  if (floatingBadge) {
+    floatingBadge.addEventListener('click', (e) => {
+      floatingBadge.classList.remove('badge-clicked');
+      void floatingBadge.offsetWidth; // Force reflow
+      floatingBadge.classList.add('badge-clicked');
+
+      const rect = floatingBadge.getBoundingClientRect();
+      const size = Math.max(rect.width, rect.height) * 1.5;
+      const x = e.clientX - rect.left - size / 2;
+      const y = e.clientY - rect.top - size / 2;
+
+      // Primary Crimson Ripple
+      const ripple1 = document.createElement('span');
+      ripple1.className = 'badge-ripple';
+      ripple1.style.width = ripple1.style.height = `${size}px`;
+      ripple1.style.left = `${x}px`;
+      ripple1.style.top = `${y}px`;
+      floatingBadge.appendChild(ripple1);
+
+      // Secondary White/Crimson Ripple
+      const ripple2 = document.createElement('span');
+      ripple2.className = 'badge-ripple-outer';
+      ripple2.style.width = ripple2.style.height = `${size}px`;
+      ripple2.style.left = `${x}px`;
+      ripple2.style.top = `${y}px`;
+      floatingBadge.appendChild(ripple2);
+
+      setTimeout(() => {
+        ripple1.remove();
+        ripple2.remove();
+      }, 2500);
+    });
+  }
+
+  /* ---------------------------------------------------------
+     19. TRIO SECTION CARDS (TOOLS I USE, WORK PROCESS, QUOTE CARD) SMALL POP-UP TILT
+  --------------------------------------------------------- */
+  const trioHoverCards = document.querySelectorAll('.trio-col, .tool-box, .process-item, .quote-card-inner');
+  trioHoverCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = ((y - centerY) / centerY) * -2.5;
+      const rotateY = ((x - centerX) / centerX) * 2.5;
+
+      card.style.transform = `perspective(1000px) translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.015)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = `perspective(1000px) translateY(0) rotateX(0) rotateY(0) scale(1)`;
+    });
+  });
+
+  /* ---------------------------------------------------------
+     21. "HELLO, I'M" SMOOTH SIDEWAY MOVING TRACKING
+  --------------------------------------------------------- */
+  const greetingEl = document.querySelector('.script-greeting, .handwritten-title');
+  if (greetingEl) {
+    greetingEl.addEventListener('mousemove', (e) => {
+      const rect = greetingEl.getBoundingClientRect();
+      const x = (e.clientX - rect.left - rect.width / 2) * 0.55; // Sideway X movement tracking
+      const y = (e.clientY - rect.top - rect.height / 2) * 0.1;
+      greetingEl.style.transform = `translate3d(${x}px, ${y - 4}px, 0) rotate(${-3 + x * 0.12}deg) scale(1.08)`;
+    });
+
+    greetingEl.addEventListener('mouseleave', () => {
+      greetingEl.style.transform = `translate3d(0, 0, 0) rotate(-3deg) scale(1)`;
+    });
   }
 
 })();
