@@ -43,21 +43,18 @@ function handleRequest(req, res) {
   });
 }
 
-module.exports = handleRequest;
-
-if (require.main === module) {
-  function listenOnAvailablePort(startPort) {
-    const server = http.createServer(handleRequest);
-    server.listen(startPort, () => {
-      console.log(`SERVER_SUCCESS: http://localhost:${startPort}/`);
-    });
-    server.on('error', (err) => {
-      if (err.code === 'EADDRINUSE') {
-        listenOnAvailablePort(startPort + 1);
-      } else {
-        console.error(err);
-      }
-    });
-  }
-  listenOnAvailablePort(8085);
+function listenOnAvailablePort(startPort) {
+  const server = http.createServer(handleRequest);
+  server.listen(startPort, () => {
+    console.log(`SERVER_SUCCESS: http://localhost:${startPort}/`);
+  });
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      listenOnAvailablePort(startPort + 1);
+    } else {
+      console.error(err);
+    }
+  });
 }
+
+listenOnAvailablePort(8085);
