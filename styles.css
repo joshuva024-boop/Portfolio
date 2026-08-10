@@ -1613,14 +1613,17 @@ section {
 
 /* Selected Projects Section */
 .projects-section {
-  margin-bottom: 50px;
+  padding: 45px 0;
+  margin-bottom: 45px;
 }
 
 .section-title-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 20px;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .section-title-bar h2 {
@@ -1744,12 +1747,19 @@ section {
 
 /* Horizontal Smooth Moving Animated Skills Marquee */
 .skills-marquee-section {
-  margin-bottom: 22px;
+  padding: 45px 0;
+  margin-top: 40px;
+  margin-bottom: 45px;
   width: 100%;
 }
 
 .skills-marquee-header {
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 18px;
+  text-align: center;
 }
 
 .marquee-title {
@@ -1843,7 +1853,8 @@ section {
 
 /* 3-Column Trio Section */
 .middle-trio-section {
-  margin-bottom: 24px;
+  padding: 45px 0;
+  margin-bottom: 45px;
 }
 
 .trio-grid {
@@ -1853,7 +1864,8 @@ section {
 }
 
 .interactive-process-section {
-  margin-bottom: 24px;
+  padding: 45px 0;
+  margin-bottom: 45px;
 }
 
 .trio-col {
@@ -1876,6 +1888,7 @@ section {
   padding-bottom: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: #FFF;
+  text-align: center;
 }
 
 .sub-title {
@@ -2508,7 +2521,7 @@ section {
    NEW TEMPLATE FEATURES: MY PROCESS, TOOLS I USE, KIND WORDS
    ============================================================ */
 .process-tools-section {
-  margin-bottom: 110px;
+  margin-bottom: 50px;
 }
 
 .process-tools-grid {
@@ -2536,6 +2549,7 @@ section {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-wrap: wrap;
   gap: 12px;
+  text-align: left;
 }
 
 .process-card-header .card-heading {
@@ -2826,8 +2840,29 @@ section {
 
 /* Kind Words Horizontal Below Layer */
 .kind-words-section {
-  margin-bottom: 24px;
+  padding: 45px 0;
+  margin-bottom: 45px;
   width: 100%;
+}
+
+.kind-words-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.section-heading-plain {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFF;
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .kind-words-container {

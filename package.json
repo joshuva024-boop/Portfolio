@@ -2,9 +2,9 @@
   "name": "jose-portfolio",
   "version": "1.0.0",
   "description": "Static portfolio site",
-  "main": "index.html",
   "scripts": {
-    "build": "echo Build complete"
+    "dev": "node server.js",
+    "start": "node server.js"
   },
   "author": "Jose",
   "license": "MIT"
