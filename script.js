@@ -715,7 +715,7 @@
   }
 
   /* ---------------------------------------------------------
-     18. FLOATING BADGE CLICK POP-UP & DUAL RIPPLE (2.5s Extended Duration)
+     18. FLOATING BADGE SMOOTH CLICK & ELEGANT RIPPLE
   --------------------------------------------------------- */
   const floatingBadge = document.querySelector('.floating-badge');
   if (floatingBadge) {
@@ -729,26 +729,18 @@
       const x = e.clientX - rect.left - size / 2;
       const y = e.clientY - rect.top - size / 2;
 
-      // Primary Crimson Ripple
-      const ripple1 = document.createElement('span');
-      ripple1.className = 'badge-ripple';
-      ripple1.style.width = ripple1.style.height = `${size}px`;
-      ripple1.style.left = `${x}px`;
-      ripple1.style.top = `${y}px`;
-      floatingBadge.appendChild(ripple1);
-
-      // Secondary White/Crimson Ripple
-      const ripple2 = document.createElement('span');
-      ripple2.className = 'badge-ripple-outer';
-      ripple2.style.width = ripple2.style.height = `${size}px`;
-      ripple2.style.left = `${x}px`;
-      ripple2.style.top = `${y}px`;
-      floatingBadge.appendChild(ripple2);
+      // Smooth Crimson Accent Ripple
+      const ripple = document.createElement('span');
+      ripple.className = 'badge-ripple';
+      ripple.style.width = ripple.style.height = `${size}px`;
+      ripple.style.left = `${x}px`;
+      ripple.style.top = `${y}px`;
+      floatingBadge.appendChild(ripple);
 
       setTimeout(() => {
-        ripple1.remove();
-        ripple2.remove();
-      }, 2500);
+        ripple.remove();
+        floatingBadge.classList.remove('badge-clicked');
+      }, 800);
     });
   }
 
